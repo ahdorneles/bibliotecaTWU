@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.twu.biblioteca.BookManagerTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2018-03-06T15:17:50" hostname="Adrianas-MacBook-Pro.local" time="0.005">
+  <properties/>
+  <testcase name="retrieveBookYearByTitleTest" classname="com.twu.biblioteca.BookManagerTest" time="0.001"/>
+  <testcase name="retrieveAvailableBookListTest" classname="com.twu.biblioteca.BookManagerTest" time="0.0"/>
+  <testcase name="retrieveBookAuthorByTitleTest" classname="com.twu.biblioteca.BookManagerTest" time="0.0"/>
+  <testcase name="setBookAvailableTest" classname="com.twu.biblioteca.BookManagerTest" time="0.0"/>
+  <testcase name="retrieveBookListTest" classname="com.twu.biblioteca.BookManagerTest" time="0.0"/>
+  <testcase name="setBookBookedTest" classname="com.twu.biblioteca.BookManagerTest" time="0.0"/>
+  <testcase name="retrieveTitleByAuthorTest" classname="com.twu.biblioteca.BookManagerTest" time="0.0"/>
+  <testcase name="retrieveBookedBookList" classname="com.twu.biblioteca.BookManagerTest" time="0.0"/>
+  <testcase name="bookAbookTest" classname="com.twu.biblioteca.BookManagerTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

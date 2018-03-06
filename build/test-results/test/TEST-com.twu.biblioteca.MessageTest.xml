@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.twu.biblioteca.MessageTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2018-03-06T15:17:50" hostname="Adrianas-MacBook-Pro.local" time="0.005">
+  <properties/>
+  <testcase name="notAvalidOptionMessageTest" classname="com.twu.biblioteca.MessageTest" time="0.002"/>
+  <testcase name="checkoutUnsucceedMessageTest" classname="com.twu.biblioteca.MessageTest" time="0.001"/>
+  <testcase name="welcomeMessageTest" classname="com.twu.biblioteca.MessageTest" time="0.0"/>
+  <testcase name="returnSuceedMessageTest" classname="com.twu.biblioteca.MessageTest" time="0.0"/>
+  <testcase name="returnUnsucceedMessageTest" classname="com.twu.biblioteca.MessageTest" time="0.0"/>
+  <testcase name="checkoutSucceedMessageTest" classname="com.twu.biblioteca.MessageTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
