@@ -8,7 +8,7 @@ import static org.mockito.Mockito.*;
 
 
 @RunWith(MockitoJUnitRunner.class)
-public class BibliotecaTest {
+public class BibliotecaAppTest {
 
     @Mock
     Console console;

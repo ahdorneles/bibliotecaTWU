@@ -1,19 +1,19 @@
 package com.twu.biblioteca;
 
-public class Biblioteca {
+import java.util.Scanner;
 
-    private BookManager bookManager;
-    private Console console;
+public class BibliotecaApp {
 
-
-    Biblioteca(BookManager bookManager, Console console) {
-        this.bookManager = bookManager;
-        this.console = console;
-    }
+    private BookManager bookManager = new BookManager();
+    private Console console = new Console(new Scanner(System.in));
 
     public void init() {
         greeting();
         menu();
+    }
+
+    private void greeting() {
+        console.greeting();
     }
 
     public void menu() {
@@ -45,17 +45,12 @@ public class Biblioteca {
 
     }
 
-    private void greeting() {
-        console.greeting();
-
-    }
-
     public void addBookTolist(Book book) {
         bookManager.addBookTolist(book);
     }
 
-    public void bookAbook() {
-        bookManager.bookAbook();
+    public void bookAbook(Book book1) {
+        bookManager.bookAbook(book1);
     }
 
     public void returnAbook(Book book) {

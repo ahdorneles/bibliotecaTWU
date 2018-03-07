@@ -1,6 +1,5 @@
 package com.twu.biblioteca;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import java.util.Scanner;
 
@@ -8,7 +7,7 @@ public class BibliotecaMain {
 
     public static void main(String[] args) {
 
-        Biblioteca biblioteca = new Biblioteca(new BookManager(), new Console(new Scanner(System.in)));
+        BibliotecaApp biblioteca = new BibliotecaApp();
 
         Book book = new Book("22","OLA",1923);
         Book book1 = new Book("44","hey",1023);
@@ -17,7 +16,8 @@ public class BibliotecaMain {
         biblioteca.addBookTolist(book);
         biblioteca.addBookTolist(book1);
         biblioteca.addBookTolist(book2);
-        book2.setBooked();
+
+        biblioteca.bookAbook(book1);
 
         biblioteca.init();
     }

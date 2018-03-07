@@ -80,7 +80,13 @@ public class BookManager {
         return bookedBookList;
     }
 
-    public void bookAbook() {
+    public void bookAbook(Book book) {
+        for (Book book1 :
+                bookList) {
+            if (book.getId() == book1.getId()) {
+                book.setBooked();
+            }
+        }
     }
 
     public void returnAbook() {
@@ -92,14 +98,16 @@ public class BookManager {
 
     public List<String> retrieveBookListForMenu() {
 
-        List<String> bookListForMenu = new ArrayList<>();
-        bookListForMenu.add(message.bookListHead());
         List<Book> list = retrieveBookList();
+        List<String> bookListForMenu = new ArrayList<>();
 
-        for (Book book :
-                list) {
+        bookListForMenu.add(message.bookListHead());
 
-            String line = printBookId() +
+        for (int i = 0; i < list.size(); i++) {
+            Book book = list.get(i);
+            book.setId(i + 1);
+
+            String line = printBookId(book) +
                     printBookTitle(book) +
                     printBookAuthor(book) +
                     printBookPublishedYear(book) +
@@ -107,8 +115,11 @@ public class BookManager {
 
             bookListForMenu.add(line);
         }
+
+
         return bookListForMenu;
     }
+
 
     private String printAvailability(Book book) {
         String available = "     NO    |";
@@ -157,9 +168,8 @@ public class BookManager {
 
     }
 
-    private String printBookId() {
-        int listSize = retrieveBookList().size();
-        String output = Integer.toString(listSize);
+    private String printBookId(Book book) {
+        String output = Integer.toString(book.getId());
 
         while (output.length() < 4) {
             output = output.concat(" ");
