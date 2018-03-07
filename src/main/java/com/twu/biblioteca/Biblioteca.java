@@ -11,7 +11,50 @@ public class Biblioteca {
         this.console = console;
     }
 
-    public void bookAbook () {
+    public void init() {
+        greeting();
+        menu();
+    }
+
+    public void menu() {
+        String option = console.selectAnOption();
+
+        if (option.equals("1")) {
+            listBooks();
+        }
+        again();
+    }
+
+    private void listBooks() {
+        console.printList(bookManager.retrieveBookListForMenu());
+    }
+
+    private void again() {
+
+        switch (console.again().toLowerCase()) {
+            case "y":
+                menu();
+                break;
+            case "n":
+                return;
+            default:
+                System.out.println("Digite um valor válido. ");
+                again();
+                break;
+        }
+
+    }
+
+    private void greeting() {
+        console.greeting();
+
+    }
+
+    public void addBookTolist(Book book) {
+        bookManager.addBookTolist(book);
+    }
+
+    public void bookAbook() {
         bookManager.bookAbook();
     }
 
@@ -19,14 +62,8 @@ public class Biblioteca {
         bookManager.returnAbook();
     }
 
-    public void bookDetails (Book book) {
+    public void bookDetails(Book book) {
         bookManager.bookDetails();
-    }
-
-    public void menu () {
-        console.greeting();
-        bookManager.retrieveBookListForMenu();
-
     }
 
 }

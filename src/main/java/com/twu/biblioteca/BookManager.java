@@ -90,35 +90,31 @@ public class BookManager {
     }
 
 
-    public void retrieveBookListForMenu() {
-        List<Book> list = retrieveBookList();
-        String description = " ID |" +
-                "           TITLE         |" +
-                "          AUTHOR         |" +
-                " PUBLISH YEAR |" +
-                " AVAILABLE | \n";
+    public List<String> retrieveBookListForMenu() {
 
-        System.out.println(description);
+        List<String> bookListForMenu = new ArrayList<>();
+        bookListForMenu.add(message.bookListHead());
+        List<Book> list = retrieveBookList();
+
         for (Book book :
                 list) {
 
             String line = printBookId() +
                     printBookTitle(book) +
                     printBookAuthor(book) +
-                    printBookPublishedYear(book) + "" +
+                    printBookPublishedYear(book) +
                     printAvailability(book) + "\n";
 
-            System.out.println(line);
-
+            bookListForMenu.add(line);
         }
-
+        return bookListForMenu;
     }
 
     private String printAvailability(Book book) {
         String available = "     NO    |";
 
-        if(!book.isBooked()) {
-            available =  "    YES    |";
+        if (!book.isBooked()) {
+            available = "    YES    |";
         }
         return available;
     }

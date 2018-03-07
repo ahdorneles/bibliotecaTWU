@@ -1,8 +1,19 @@
 package com.twu.biblioteca;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Message {
 
 
+    public String bookListHead() {
+        return " ID |" +
+                "           TITLE         |" +
+                "          AUTHOR         |" +
+                " PUBLISH YEAR |" +
+                " AVAILABLE | \n";
+
+    }
     public String welcomeMessage () {
         return "Welcome to Biblioteca!";
     }
