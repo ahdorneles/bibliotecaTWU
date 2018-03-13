@@ -1,7 +1,4 @@
-package com.twu.biblioteca.Utils;
-
-import java.util.ArrayList;
-import java.util.List;
+package com.twu.biblioteca.utils;
 
 public class Message {
 
@@ -70,5 +67,20 @@ public class Message {
         return "Please select an Option \n" +
                 "1. Login\n" +
                 "2. List Available Items";
+    }
+
+    public String password() {
+        return "Please insert your Password \n";
+    }
+
+    public String username() {
+        return "Please insert your Username \n";
+
+    }
+
+    public String isLoginSuccessful(boolean login) {
+        return login ?
+                "Login Successful":
+                "Login error. Try again";
     }
 }

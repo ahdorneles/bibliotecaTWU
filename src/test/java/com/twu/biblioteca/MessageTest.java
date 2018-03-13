@@ -1,6 +1,6 @@
 package com.twu.biblioteca;
 
-import com.twu.biblioteca.Utils.Message;
+import com.twu.biblioteca.utils.Message;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertEquals;
@@ -15,22 +15,22 @@ public class MessageTest {
 
     @Test
     public void checkoutSucceedMessageTest() {
-        assertEquals("Thank you! Enjoy the book", new Message().isCheckoutSuccessful(true));
+        assertEquals("Thank you! Enjoy :)\n", new Message().isCheckoutSuccessful(true));
     }
 
     @Test
     public void checkoutUnsucceedMessageTest() {
-        assertEquals("That book is not available.", new Message().isCheckoutSuccessful(false));
+        assertEquals("This item is not available.\n", new Message().isCheckoutSuccessful(false));
     }
 
     @Test
     public void returnSuceedMessageTest() {
-        assertEquals("Thank your for returning the book.", new Message().isReturnSuccessful(true));
+        assertEquals("Thank you for returning it :).\n", new Message().isReturnSuccessful(true));
     }
 
     @Test
     public void returnUnsucceedMessageTest () {
-        assertEquals("That is not a valid book to return.", new Message().isReturnSuccessful(false));
+        assertEquals("That is not a valid item to return.\n", new Message().isReturnSuccessful(false));
     }
 
     @Test

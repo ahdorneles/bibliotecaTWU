@@ -1,7 +1,8 @@
 package com.twu.biblioteca;
-import com.twu.biblioteca.LibraryItem.LibraryItem;
-import com.twu.biblioteca.Utils.CatalogueAdmin;
-import com.twu.biblioteca.Utils.Console;
+import com.twu.biblioteca.libraryitem.Book;
+import com.twu.biblioteca.libraryitem.LibraryItem;
+import com.twu.biblioteca.utils.CatalogueAdmin;
+import com.twu.biblioteca.utils.Console;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,7 +18,7 @@ import static org.mockito.Mockito.*;
 public class BibliotecaAppTest {
 
     private BibliotecaApp biblioteca;
-    private LibraryItem.Book book;
+    private LibraryItem book;
 
     @Mock
     private
@@ -32,7 +33,7 @@ public class BibliotecaAppTest {
     @Before
     public void init() {
         MockitoAnnotations.initMocks(this);
-        book = new LibraryItem.Book("22","22", 1234);
+        book = new Book("22","22", 1234);
         biblioteca = new BibliotecaApp(catalogueAdmin,console);
 
     }
@@ -50,10 +51,6 @@ public class BibliotecaAppTest {
         verify(console, times(1)).bookAddedToList();
     }
 
-    @Test
-    public void shouldSearchAuthorByTitle(){
-        verify(console,times(1)).printAuthor();
-    }
 
     @Test
     public void shouldCheckoutAbook() {

@@ -1,4 +1,6 @@
-package com.twu.biblioteca.LibraryItem;
+package com.twu.biblioteca.libraryitem;
+
+import com.twu.biblioteca.user.User;
 
 public class LibraryItem {
 
@@ -6,6 +8,7 @@ public class LibraryItem {
     private String author;
     private boolean isBooked = false;
     private int id;
+    private User user;
 
     public LibraryItem(String title, String author) {
         this.title = title;

@@ -1,8 +1,8 @@
-package com.twu.biblioteca.Utils;
+package com.twu.biblioteca.utils;
 
-import com.twu.biblioteca.LibraryItem.Book;
-import com.twu.biblioteca.LibraryItem.LibraryItem;
-import com.twu.biblioteca.LibraryItem.Movie;
+import com.twu.biblioteca.libraryitem.Book;
+import com.twu.biblioteca.libraryitem.LibraryItem;
+import com.twu.biblioteca.libraryitem.Movie;
 
 import java.util.ArrayList;
 import java.util.List;

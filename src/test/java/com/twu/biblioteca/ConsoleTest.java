@@ -1,7 +1,7 @@
 package com.twu.biblioteca;
 
-import com.twu.biblioteca.Utils.Console;
-import com.twu.biblioteca.Utils.Message;
+import com.twu.biblioteca.utils.Console;
+import com.twu.biblioteca.utils.Message;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;

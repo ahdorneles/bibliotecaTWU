@@ -1,8 +1,8 @@
 package com.twu.biblioteca;
 
 
-import com.twu.biblioteca.Utils.CatalogueAdmin;
-import com.twu.biblioteca.Utils.Console;
+import com.twu.biblioteca.utils.CatalogueAdmin;
+import com.twu.biblioteca.utils.Console;
 
 import java.util.Scanner;
 

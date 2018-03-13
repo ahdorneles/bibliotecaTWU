@@ -1,6 +1,5 @@
-package com.twu.biblioteca.LibraryItem;
+package com.twu.biblioteca.libraryitem;
 
-import com.twu.biblioteca.LibraryItem.LibraryItem;
 
 public class Movie extends LibraryItem {
 

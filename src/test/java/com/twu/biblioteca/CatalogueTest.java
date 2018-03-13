@@ -1,7 +1,9 @@
+
 package com.twu.biblioteca;
 
-import com.twu.biblioteca.LibraryItem.LibraryItem;
-import com.twu.biblioteca.Utils.CatalogueAdmin;
+import com.twu.biblioteca.libraryitem.Book;
+import com.twu.biblioteca.libraryitem.LibraryItem;
+import com.twu.biblioteca.utils.CatalogueAdmin;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -15,14 +17,14 @@ public class CatalogueTest {
 
 
     private CatalogueAdmin bookManager;
-    private LibraryItem.Book book1;
+    private LibraryItem book1;
 
     @Before
     public void initialize() {
         bookManager = new CatalogueAdmin();
-        book1 = new LibraryItem.Book("22", "jose", 1928);
-        LibraryItem.Book book2 = new LibraryItem.Book("33", "maria", 1989);
-        LibraryItem.Book book3 = new LibraryItem.Book("44", "maria", 2019);
+        book1 = new Book("22", "jose", 1928);
+        LibraryItem book2 = new Book("33", "maria", 1989);
+        LibraryItem book3 = new Book("44", "maria", 2019);
 
         bookManager.addItemTolist(book1);
         bookManager.addItemTolist(book2);
@@ -53,33 +55,32 @@ public class CatalogueTest {
 
     @Test
     public void setBookBookedTest() {
-        book1.returnBook();
+        book1.checkoutItem();
         assertTrue(book1.isBooked());
     }
 
     @Test
     public void setBookAvailableTest() {
-        book1.returnBook();
-        assertTrue(book1.isBooked());
 
-        book1.returnBook();
+        book1.returnItem();
         assertFalse(book1.isBooked());
 
     }
 
     @Test
     public void retrieveAvailableBookListTest() {
-        book1.checkoutBook();
+        book1.checkoutItem();
         assertEquals(2, bookManager.retrieveAvailableBookList().size());
 
     }
 
     @Test
     public void bookAbookTest() {
-        book1.checkoutBook();
+        book1.checkoutItem();
         assertTrue(book1.isBooked());
 
     }
 
 
 }
+

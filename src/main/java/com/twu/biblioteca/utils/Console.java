@@ -1,6 +1,5 @@
-package com.twu.biblioteca.Utils;
+package com.twu.biblioteca.utils;
 
-import com.twu.biblioteca.Utils.Message;
 
 import java.util.List;
 import java.util.Scanner;
@@ -63,15 +62,26 @@ public class Console {
 
     }
 
-    public void printAuthor() {
-    }
 
     public void bye() {
         print(message.bye());
     }
 
-    public void login() {
 
+    public void loginSucceed(boolean loginSucceed) {
+        print(message.isLoginSuccessful(loginSucceed));
 
     }
+
+    public String password() {
+        print(message.password());
+        return input.next();
+    }
+
+    public String username() {
+        print(message.username());
+        return input.next();
+
+    }
+
 }

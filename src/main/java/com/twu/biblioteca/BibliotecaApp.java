@@ -1,16 +1,21 @@
 package com.twu.biblioteca;
 
 
-import com.twu.biblioteca.LibraryItem.Book;
-import com.twu.biblioteca.LibraryItem.LibraryItem;
-import com.twu.biblioteca.LibraryItem.Movie;
-import com.twu.biblioteca.Utils.CatalogueAdmin;
-import com.twu.biblioteca.Utils.Console;
+import com.twu.biblioteca.libraryitem.Book;
+import com.twu.biblioteca.libraryitem.LibraryItem;
+import com.twu.biblioteca.libraryitem.Movie;
+import com.twu.biblioteca.user.User;
+import com.twu.biblioteca.utils.CatalogueAdmin;
+import com.twu.biblioteca.utils.Console;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BibliotecaApp {
 
     private CatalogueAdmin catalogueAdmin;
     private Console console;
+    private List<User> users = new ArrayList<>();
 
     public BibliotecaApp(CatalogueAdmin catalogueAdmin, Console console) {
         this.catalogueAdmin = catalogueAdmin;
@@ -66,10 +71,26 @@ public class BibliotecaApp {
     }
 
     private void login() {
-        console.login();
+        String username = console.username();
+        String password = console.password();
+        authenticate(username,password);
+
+
     }
 
+    private void authenticate(String username, String password) {
 
+        for (User user :
+                users) {
+            if (user.getEmail().equals(username)) {
+                user.getPassword().equals(password);
+                console.loginSucceed(true);
+            } else {
+                console.loginSucceed(false);
+                login();
+            }
+        }
+    }
     public void listItems() {
 
         String option = console.selectAnOption();
@@ -104,11 +125,12 @@ public class BibliotecaApp {
                 menu();
                 break;
             case "n":
-                 console.bye();
+                console.bye();
                 return;
             default:
                 console.print("Digite um valor válido.");
                 again();
+
                 break;
         }
 
