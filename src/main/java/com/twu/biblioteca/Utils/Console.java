@@ -23,16 +23,11 @@ public class Console {
         return input.next();
     }
 
-
-    public void printList(List<String> strings) {
-        print(message.listHead());
-
-        for (String s :
-                strings) {
-            print(s);
-        }
-
+    public String loginOrList() {
+        print(message.loginOrList());
+        return input.next();
     }
+
 
     public String again() {
         print(message.doYouWantToContinue());
@@ -43,6 +38,23 @@ public class Console {
     public void bookAddedToList() {
         print(message.bookAddedToList());
 
+    }
+
+    public void checkoutSucceed(boolean bool) {
+        print(message.isCheckoutSuccessful(bool));
+    }
+
+    public void returnSucced(boolean bool) {
+        print(message.isReturnSuccessful(bool));
+    }
+
+    public void printAnyList(List<String> strings) {
+        print(message.listHead());
+
+        for (String s :
+                strings) {
+            print(s);
+        }
 
     }
 
@@ -52,5 +64,14 @@ public class Console {
     }
 
     public void printAuthor() {
+    }
+
+    public void bye() {
+        print(message.bye());
+    }
+
+    public void login() {
+
+
     }
 }

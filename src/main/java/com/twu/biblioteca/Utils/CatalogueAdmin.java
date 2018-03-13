@@ -18,32 +18,6 @@ public class CatalogueAdmin {
     }
 
 
-    public String getAuthorByTitle(String title) {
-
-        String author = null;
-
-        for (LibraryItem item : libraryItemList) {
-            if (item.getTitle().equals(title)) {
-                author = item.getAuthor();
-            }
-        }
-
-        return author;
-    }
-
-    public List<String> getTitleByAuthor(String author) {
-
-        List<String> titleByAuthor = new ArrayList<>();
-
-        for (LibraryItem item : libraryItemList) {
-            if (item.getAuthor().equals(author)) {
-                titleByAuthor.add(item.getTitle());
-            }
-        }
-
-        return titleByAuthor;
-    }
-
     public List<LibraryItem> retrieveItemsList() {
         return libraryItemList;
     }
@@ -72,68 +46,94 @@ public class CatalogueAdmin {
         return availableMovieList;
     }
 
-    public void bookAnItem(LibraryItem item) {
+    public boolean bookAnItem(LibraryItem item) {
+        boolean booked = false;
 
-        for (LibraryItem libraryItem1 :
+        for (LibraryItem items :
                 libraryItemList) {
-            if (item.getId() == item.getId()) {
+            if (items.getTitle().equals(item.getTitle())) {
                 item.checkoutItem();
+                booked = true;
             }
         }
+        return booked;
     }
 
-    public void returnAbook() {
-    }
+    public boolean returnAnItem(LibraryItem item) {
 
-    public void bookDetails() {
-    }
+        boolean returned = false;
 
+        for (LibraryItem items :
+                libraryItemList) {
+            if (items.getTitle().equals(item.getTitle())) {
+                item.returnItem();
+                returned = true;
+            }
+        }
+        return returned;
+    }
 
     public List<String> retrieveBookListForMenu() {
 
         List<Book> list = retrieveAvailableBookList();
-        List<String> bookListForMenu = new ArrayList<>();
-
-        for (int i = 0; i < list.size(); i++) {
-            Book book = (Book) list.get(i);
-            book.setId(i + 1);
-
-            String line =
-                    printItemTitle(book) +
-                    printAuthor(book) +
-                    printPublishedYear(book) +
-                    printAvailability(book) + "\n";
-
-            bookListForMenu.add(line);
-        }
-
-
-        return bookListForMenu;
+        return catalogueListForMenu(list);
     }
 
     public List<String> retrieveMovieListForMenu() {
 
         List<Movie> list = retrieveAvailableMovieList();
-        List<String> bookListForMenu = new ArrayList<>();
+        return catalogueListForMenu(list);
+    }
 
+    public List<String> catalogueListForMenu(List<? extends LibraryItem> list) {
+
+        List<String> catalogueList = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
-            Movie movie = list.get(i);
-            movie.setId(i + 1);
+            LibraryItem libraryItem = list.get(i);
+            libraryItem.setId(i + 1);
 
             String line =
-                    printItemTitle(movie) +
-                    printAuthor(movie) +
-                    printMovieRating(movie) +
-                    printAvailability(movie) + "\n";
+                    printItemTitle(libraryItem) +
+                    printAuthor(libraryItem) +
+                            (libraryItem instanceof Movie ?
+                                    printMovieRating((Movie)libraryItem) :
+                                    printPublishedYear((Book) libraryItem))+
+                    printAvailability(libraryItem) + "\n";
 
-            bookListForMenu.add(line);
+            catalogueList.add(line);
         }
 
 
-        return bookListForMenu;
+        return catalogueList;
     }
 
-    private Object printMovieRating(Movie movie) {
+    public String getAuthorByTitle(String title) {
+
+        String author = null;
+
+        for (LibraryItem item : libraryItemList) {
+            if (item.getTitle().equals(title)) {
+                author = item.getAuthor();
+            }
+        }
+
+        return author;
+    }
+
+    public List<String> getTitleByAuthor(String author) {
+
+        List<String> titleByAuthor = new ArrayList<>();
+
+        for (LibraryItem item : libraryItemList) {
+            if (item.getAuthor().equals(author)) {
+                titleByAuthor.add(item.getTitle());
+            }
+        }
+
+        return titleByAuthor;
+    }
+
+    private String printMovieRating(Movie movie) {
         String output = Integer.toString(movie.getRating());
 
         while (output.length() < 14) {

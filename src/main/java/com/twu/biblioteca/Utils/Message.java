@@ -29,14 +29,14 @@ public class Message {
     public String isCheckoutSuccessful(boolean succeed) {
 
         return succeed
-                ? "Thank you! Enjoy the book"
-                :  "That book is not available.";
+                ? "Thank you! Enjoy :)\n"
+                :  "This item is not available.\n";
     }
 
     public String isReturnSuccessful (boolean succeed) {
         return succeed
-                ? "Thank your for returning the book."
-                : "That is not a valid book to return.";
+                ? "Thank you for returning it :).\n"
+                : "That is not a valid item to return.\n";
    }
 
     public String isItAValidOption(boolean validOption) {
@@ -63,6 +63,12 @@ public class Message {
     }
 
     public String bookAddedToList() {
-        return "The book was added to the List.";
+        return "The book was added to the List.\n";
+    }
+
+    public String loginOrList() {
+        return "Please select an Option \n" +
+                "1. Login\n" +
+                "2. List Available Items";
     }
 }

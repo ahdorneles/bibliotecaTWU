@@ -30,6 +30,11 @@ public class BibliotecaApp {
         addItemToList(book2);
         addItemToList(movie);
         addItemToList(movie2);
+
+        bookAnItem(book);
+        bookAnItem(book1);
+        returnAnItem(book1);
+        returnAnItem(book);
         menu();
     }
 
@@ -38,25 +43,58 @@ public class BibliotecaApp {
     }
 
     public void menu() {
+        loginOrList();
+    }
+
+
+    public void loginOrList() {
+        String option = console.loginOrList();
+
+        switch (option) {
+            case "1":
+                login();
+                break;
+            case "2":
+                listItems();
+                break;
+            default:
+                console.print("Digite um valor válido.");
+                again();
+                break;
+        }
+        again();
+    }
+
+    private void login() {
+        console.login();
+    }
+
+
+    public void listItems() {
+
         String option = console.selectAnOption();
 
-        if (option.equals("1")) {
-            listBooks();
-        }
-
-        if (option.equals("2")) {
-            listMovies();
+        switch (option) {
+            case "1":
+                listBooks();
+                break;
+            case "2":
+                listMovies();
+                break;
+            default:
+                console.print("Digite um valor válido.");
+                again();
+                break;
         }
         again();
     }
 
     private void listMovies() {
-        console.printList(catalogueAdmin.retrieveMovieListForMenu());
+        console.printAnyList(catalogueAdmin.retrieveMovieListForMenu());
     }
 
     private void listBooks() {
-
-        console.printList(catalogueAdmin.retrieveBookListForMenu());
+        console.printAnyList(catalogueAdmin.retrieveBookListForMenu());
     }
 
     private void again() {
@@ -66,6 +104,7 @@ public class BibliotecaApp {
                 menu();
                 break;
             case "n":
+                 console.bye();
                 return;
             default:
                 console.print("Digite um valor válido.");
@@ -81,15 +120,14 @@ public class BibliotecaApp {
     }
 
     public void bookAnItem(LibraryItem libraryItem) {
-        catalogueAdmin.bookAnItem(libraryItem);
+        boolean checkoutSucced = catalogueAdmin.bookAnItem(libraryItem);
+        console.checkoutSucceed(checkoutSucced);
+
     }
 
-    public void returnAbook(Book book) {
-        catalogueAdmin.returnAbook();
-    }
-
-    public void bookDetails(Book book) {
-        catalogueAdmin.bookDetails();
+    public void returnAnItem(LibraryItem libraryItem) {
+        boolean returnSucced = catalogueAdmin.returnAnItem(libraryItem);
+        console.returnSucced(returnSucced);
     }
 
 }

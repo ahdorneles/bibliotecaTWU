@@ -12,14 +12,6 @@ public class Movie extends LibraryItem {
         this.rating = rating;
     }
 
-    public void returnMovie() {
-        super.returnItem();
-    }
-
-    public void checkoutMovie() {
-        super.checkoutItem();
-    }
-
     public int getRating() {
         return rating;
     }

@@ -12,14 +12,6 @@ public class Book extends LibraryItem {
 
     }
 
-    public void returnBook() {
-        super.returnItem();
-    }
-
-    public void checkoutBook() {
-        super.checkoutItem();
-    }
-
     public int getPublishYear() {
         return publishYear;
     }
