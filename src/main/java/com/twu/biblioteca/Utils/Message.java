@@ -1,4 +1,4 @@
-package com.twu.biblioteca;
+package com.twu.biblioteca.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,12 +6,20 @@ import java.util.List;
 public class Message {
 
 
-    public String bookListHead() {
-        return " ID |" +
+    public String listHead() {
+        return
                 "           TITLE         |" +
                 "          AUTHOR         |" +
                 " PUBLISH YEAR |" +
                 " AVAILABLE | \n";
+
+    }
+    public String movieListHead() {
+        return
+                         "           TITLE         |" +
+                        "          AUTHOR         |" +
+                        " RATING |" +
+                        " AVAILABLE | \n";
 
     }
     public String welcomeMessage () {
@@ -42,7 +50,8 @@ public class Message {
 
     public String selectAnOption () {
         return "Please select an Option \n" +
-                "1. List Books";
+                "1. List Books\n" +
+                "2. List Movies";
     }
 
     public String doYouWantToContinue () {
@@ -51,5 +60,9 @@ public class Message {
 
     public String bye () {
         return "See you next time! ";
+    }
+
+    public String bookAddedToList() {
+        return "The book was added to the List.";
     }
 }

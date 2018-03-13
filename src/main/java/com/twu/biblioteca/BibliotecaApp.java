@@ -1,18 +1,39 @@
 package com.twu.biblioteca;
 
-import java.util.Scanner;
+
+import com.twu.biblioteca.LibraryItem.Book;
+import com.twu.biblioteca.LibraryItem.LibraryItem;
+import com.twu.biblioteca.LibraryItem.Movie;
+import com.twu.biblioteca.Utils.CatalogueAdmin;
+import com.twu.biblioteca.Utils.Console;
 
 public class BibliotecaApp {
 
-    private BookManager bookManager = new BookManager();
-    private Console console = new Console(new Scanner(System.in));
+    private CatalogueAdmin catalogueAdmin;
+    private Console console;
+
+    public BibliotecaApp(CatalogueAdmin catalogueAdmin, Console console) {
+        this.catalogueAdmin = catalogueAdmin;
+        this.console = console;
+    }
 
     public void init() {
         greeting();
+        LibraryItem book = new Book("22", "OLA", 1923);
+        LibraryItem book1 = new Book("44", "hey", 1023);
+        LibraryItem book2 = new Book("55", "joao", 1999);
+        LibraryItem movie = new Movie("O filme", "Teste", 6);
+        LibraryItem movie2 = new Movie("OutroFilme", "Teste2", 8);
+
+        addItemToList(book);
+        addItemToList(book1);
+        addItemToList(book2);
+        addItemToList(movie);
+        addItemToList(movie2);
         menu();
     }
 
-    private void greeting() {
+    public void greeting() {
         console.greeting();
     }
 
@@ -22,11 +43,20 @@ public class BibliotecaApp {
         if (option.equals("1")) {
             listBooks();
         }
+
+        if (option.equals("2")) {
+            listMovies();
+        }
         again();
     }
 
+    private void listMovies() {
+        console.printList(catalogueAdmin.retrieveMovieListForMenu());
+    }
+
     private void listBooks() {
-        console.printList(bookManager.retrieveBookListForMenu());
+
+        console.printList(catalogueAdmin.retrieveBookListForMenu());
     }
 
     private void again() {
@@ -38,27 +68,28 @@ public class BibliotecaApp {
             case "n":
                 return;
             default:
-                System.out.println("Digite um valor válido. ");
+                console.print("Digite um valor válido.");
                 again();
                 break;
         }
 
     }
 
-    public void addBookTolist(Book book) {
-        bookManager.addBookTolist(book);
+    public void addItemToList(LibraryItem item) {
+        catalogueAdmin.addItemTolist(item);
+        console.bookAddedToList();
     }
 
-    public void bookAbook(Book book1) {
-        bookManager.bookAbook(book1);
+    public void bookAnItem(LibraryItem libraryItem) {
+        catalogueAdmin.bookAnItem(libraryItem);
     }
 
     public void returnAbook(Book book) {
-        bookManager.returnAbook();
+        catalogueAdmin.returnAbook();
     }
 
     public void bookDetails(Book book) {
-        bookManager.bookDetails();
+        catalogueAdmin.bookDetails();
     }
 
 }

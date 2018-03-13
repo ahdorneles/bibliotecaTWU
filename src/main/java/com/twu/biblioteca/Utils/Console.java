@@ -1,4 +1,6 @@
-package com.twu.biblioteca;
+package com.twu.biblioteca.Utils;
+
+import com.twu.biblioteca.Utils.Message;
 
 import java.util.List;
 import java.util.Scanner;
@@ -13,25 +15,42 @@ public class Console {
     }
 
     public void greeting() {
-        System.out.println(message.welcomeMessage());
+        print(message.welcomeMessage());
     }
 
     public String selectAnOption() {
-        System.out.println(message.selectAnOption());
+        print(message.selectAnOption());
         return input.next();
     }
 
 
     public void printList(List<String> strings) {
+        print(message.listHead());
+
         for (String s :
                 strings) {
-            System.out.println(s);
+            print(s);
         }
+
     }
 
     public String again() {
-        System.out.println(message.doYouWantToContinue());
+        print(message.doYouWantToContinue());
         return input.next();
 
+    }
+
+    public void bookAddedToList() {
+        print(message.bookAddedToList());
+
+
+    }
+
+    public void print(String string) {
+        System.out.println(string);
+
+    }
+
+    public void printAuthor() {
     }
 }

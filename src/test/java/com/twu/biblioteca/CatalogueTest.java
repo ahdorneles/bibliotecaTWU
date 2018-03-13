@@ -1,5 +1,7 @@
 package com.twu.biblioteca;
 
+import com.twu.biblioteca.LibraryItem.LibraryItem;
+import com.twu.biblioteca.Utils.CatalogueAdmin;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -9,29 +11,29 @@ import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertTrue;
 
-public class BookManagerTest {
+public class CatalogueTest {
 
 
-    private BookManager bookManager;
-    private Book book1;
+    private CatalogueAdmin bookManager;
+    private LibraryItem.Book book1;
 
     @Before
     public void initialize() {
-        bookManager = new BookManager();
-        book1 = new Book("22", "jose", 1928);
-        Book book2 = new Book("33", "maria", 1989);
-        Book book3 = new Book("44", "maria", 2019);
+        bookManager = new CatalogueAdmin();
+        book1 = new LibraryItem.Book("22", "jose", 1928);
+        LibraryItem.Book book2 = new LibraryItem.Book("33", "maria", 1989);
+        LibraryItem.Book book3 = new LibraryItem.Book("44", "maria", 2019);
 
-        bookManager.addBookTolist(book1);
-        bookManager.addBookTolist(book2);
-        bookManager.addBookTolist(book3);
+        bookManager.addItemTolist(book1);
+        bookManager.addItemTolist(book2);
+        bookManager.addItemTolist(book3);
 
     }
 
     @Test
-    public void retrieveBookListTest() {
+    public void retrieveLibraryItemListTest() {
 
-        List<Book> bookList = bookManager.retrieveBookList();
+        List<LibraryItem> bookList = bookManager.retrieveItemsList();
         assertEquals(3, bookList.size());
 
     }
@@ -42,12 +44,6 @@ public class BookManagerTest {
 
     }
 
-    @Test
-    public void retrieveBookYearByTitleTest() {
-        assertEquals(1989, bookManager.getYearByTitle("33"));
-
-
-    }
 
     @Test
     public void retrieveTitleByAuthorTest() {
@@ -57,13 +53,13 @@ public class BookManagerTest {
 
     @Test
     public void setBookBookedTest() {
-        book1.setBooked();
+        book1.returnBook();
         assertTrue(book1.isBooked());
     }
 
     @Test
     public void setBookAvailableTest() {
-        book1.setBooked();
+        book1.returnBook();
         assertTrue(book1.isBooked());
 
         book1.returnBook();
@@ -73,23 +69,17 @@ public class BookManagerTest {
 
     @Test
     public void retrieveAvailableBookListTest() {
-        book1.setBooked();
+        book1.checkoutBook();
         assertEquals(2, bookManager.retrieveAvailableBookList().size());
 
     }
 
     @Test
-    public void retrieveBookedBookList() {
-        book1.setBooked();
-        assertEquals(1, bookManager.retrieveBookedBookList().size());
-    }
-
-    @Test
     public void bookAbookTest() {
+        book1.checkoutBook();
+        assertTrue(book1.isBooked());
 
     }
-
-
 
 
 }

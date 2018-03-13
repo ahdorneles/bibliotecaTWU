@@ -1,5 +1,6 @@
 package com.twu.biblioteca;
 
+import com.twu.biblioteca.Utils.Message;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertEquals;
