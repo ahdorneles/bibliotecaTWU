@@ -88,6 +88,7 @@ public class CatalogueAdmin {
     public List<String> catalogueListForMenu(List<? extends LibraryItem> list) {
 
         List<String> catalogueList = new ArrayList<>();
+
         for (int i = 0; i < list.size(); i++) {
             LibraryItem libraryItem = list.get(i);
             libraryItem.setId(i + 1);
@@ -105,32 +106,6 @@ public class CatalogueAdmin {
 
 
         return catalogueList;
-    }
-
-    public String getAuthorByTitle(String title) {
-
-        String author = null;
-
-        for (LibraryItem item : libraryItemList) {
-            if (item.getTitle().equals(title)) {
-                author = item.getAuthor();
-            }
-        }
-
-        return author;
-    }
-
-    public List<String> getTitleByAuthor(String author) {
-
-        List<String> titleByAuthor = new ArrayList<>();
-
-        for (LibraryItem item : libraryItemList) {
-            if (item.getAuthor().equals(author)) {
-                titleByAuthor.add(item.getTitle());
-            }
-        }
-
-        return titleByAuthor;
     }
 
     private String printMovieRating(Movie movie) {

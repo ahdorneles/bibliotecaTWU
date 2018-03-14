@@ -1,6 +1,4 @@
 package com.twu.biblioteca;
-import com.sun.source.tree.AssertTree;
-import com.sun.tools.internal.xjc.reader.dtd.bindinfo.BIAttribute;
 import com.twu.biblioteca.libraryitem.Book;
 import com.twu.biblioteca.libraryitem.LibraryItem;
 import com.twu.biblioteca.utils.CatalogueAdmin;
@@ -13,8 +11,6 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 
 
-import static junit.framework.TestCase.assertTrue;
-import static org.junit.Assert.assertFalse;
 import static org.mockito.Mockito.*;
 
 

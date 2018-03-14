@@ -18,6 +18,7 @@ public class BibliotecaApp {
     private CatalogueAdmin catalogueAdmin;
     private Console console;
     private AccountManager accountManager;
+    private boolean isLogged = false;
 
     public BibliotecaApp(CatalogueAdmin catalogueAdmin, Console console) {
         this.catalogueAdmin = catalogueAdmin;
@@ -74,11 +75,20 @@ public class BibliotecaApp {
     }
 
     private void login() {
-        String username = console.username();
+        String libraryId = console.username();
+        if(libraryId.toLowerCase().equals("b")) {
+            loginOrList();
+        }
         String password = console.password();
-        authenticate(username, password);
 
-
+        if(authenticate(libraryId, password)) {
+            isLogged = true;
+            console.loginSucceed(true);
+            listItems();
+        } else {
+            console.loginSucceed(false);
+            login();
+        }
     }
 
     public boolean authenticate(String email, String password) {
@@ -96,11 +106,25 @@ public class BibliotecaApp {
             case "2":
                 listMovies();
                 break;
+            case "3":
+                listUserInfo();
+                break;
+            case "4":
+                logout();
             default:
                 console.print("Digite um valor válido.");
                 again();
                 break;
         }
+    }
+
+    private void logout() {
+        isLogged = false;
+        loginOrList();
+    }
+
+    private void listUserInfo() {
+        console.print(accountManager.getWhoIsLogged().toString());
     }
 
     private void listMovies() {
@@ -117,6 +141,9 @@ public class BibliotecaApp {
             case "y":
                 menu();
                 break;
+            case "b":
+                lastMenu();
+                break;
             case "n":
                 console.bye();
                 return;
@@ -127,6 +154,14 @@ public class BibliotecaApp {
                 break;
         }
 
+    }
+
+    private void lastMenu() {
+        if(isLogged) {
+            listItems();
+        } else {
+            loginOrList();
+        }
     }
 
     public void addItemToList(LibraryItem item) {

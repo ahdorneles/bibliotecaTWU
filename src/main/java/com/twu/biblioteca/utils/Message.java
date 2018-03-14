@@ -48,11 +48,13 @@ public class Message {
     public String selectAnOption () {
         return "Please select an Option \n" +
                 "1. List Books\n" +
-                "2. List Movies";
+                "2. List Movies\n" +
+                "3. My Info\n" +
+                "4. To logout";
     }
 
     public String doYouWantToContinue () {
-        return "Do you want to continue on the app? Type Y for Yes, or N for no";
+        return "Do you want to continue on the app? Type Y for Yes, N for no or B to last menu:";
     }
 
     public String bye () {
@@ -70,11 +72,11 @@ public class Message {
     }
 
     public String password() {
-        return "Please insert your Password \n";
+        return "Please insert your Password:";
     }
 
     public String username() {
-        return "Please insert your Username \n";
+        return "Please insert your Library Id or B to back to first menu:";
 
     }
 
