@@ -52,4 +52,12 @@ public class LibraryItem {
     public User getUser() {
         return user;
     }
+
+    public String getUserName() {
+        if (user == null) {
+            return "";
+        } else {
+            return user.getName();
+        }
+    }
 }

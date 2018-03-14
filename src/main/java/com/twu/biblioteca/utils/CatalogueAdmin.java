@@ -22,24 +22,49 @@ public class CatalogueAdmin {
         return libraryItemList;
     }
 
+
+    public List<Book> retrieveBookList() {
+        List<Book> bookList = new ArrayList<>();
+        for (LibraryItem libraryItem :
+                libraryItemList) {
+            if (libraryItem instanceof Book) {
+                bookList.add((Book) libraryItem);
+            }
+
+        }
+        return bookList;
+    }
+
     public List<Book> retrieveAvailableBookList() {
-        List<Book> availableBookList = new ArrayList<>();
+        List<Book> availableBookList = retrieveBookList();
 
         for (LibraryItem libraryItem :
                 libraryItemList) {
-            if (libraryItem instanceof Book && !libraryItem.isBooked()) {
+            if (!libraryItem.isBooked()) {
                 availableBookList.add((Book)libraryItem);
             }
         }
         return availableBookList;
     }
 
+    public List<Movie> retrieveMovieList() {
+        List<Movie> movieList = new ArrayList<>();
+        for (LibraryItem libraryItem :
+                libraryItemList) {
+            if (libraryItem instanceof Movie) {
+                movieList.add((Movie)libraryItem);
+            }
+
+        }
+        return movieList;
+    }
+
     public List<Movie> retrieveAvailableMovieList() {
-        List<Movie> availableMovieList = new ArrayList<>();
+        List<Movie> availableMovieList = retrieveMovieList();
 
         for (LibraryItem libraryItem :
                 libraryItemList) {
-            if (libraryItem instanceof Movie && !libraryItem.isBooked()) {
+            if (libraryItem.isBooked()) {
                 availableMovieList.add((Movie)libraryItem);
             }
         }
@@ -73,20 +98,29 @@ public class CatalogueAdmin {
         return returned;
     }
 
-    public List<String> retrieveBookListForMenu() {
+    public List<String> retrieveAvailableBookListForMenu() {
 
         List<Book> list = retrieveAvailableBookList();
-        return catalogueListForMenu(list);
+        return catalogueListForMenu(list,true);
+    }
+
+    public List<String> retrieveAvailableMovieListForMenu() {
+
+        List<Movie> list = retrieveAvailableMovieList();
+        return catalogueListForMenu(list,true);
+    }
+
+    public List <String> retrieveBookListForMenu() {
+        List<Book> list = retrieveBookList();
+        return catalogueListForMenu(list,false);
     }
 
     public List<String> retrieveMovieListForMenu() {
-
-        List<Movie> list = retrieveAvailableMovieList();
-        return catalogueListForMenu(list);
+        List<Movie> list = retrieveMovieList();
+        return catalogueListForMenu(list,false);
     }
 
-    public List<String> catalogueListForMenu(List<? extends LibraryItem> list) {
-
+    public List<String> catalogueListForMenu(List<? extends LibraryItem> list, boolean justAvailableItems) {
         List<String> catalogueList = new ArrayList<>();
 
         for (int i = 0; i < list.size(); i++) {
@@ -99,7 +133,8 @@ public class CatalogueAdmin {
                             (libraryItem instanceof Movie ?
                                     printMovieRating((Movie)libraryItem) :
                                     printPublishedYear((Book) libraryItem))+
-                    printAvailability(libraryItem) + "\n";
+                    printAvailability(libraryItem) +
+                            (justAvailableItems ? '\n' : printUserbooking(libraryItem));
 
             catalogueList.add(line);
         }
@@ -163,4 +198,16 @@ public class CatalogueAdmin {
         return output.concat("|");
 
     }
+
+    private String printUserbooking (LibraryItem item) {
+
+        String output = item.getUserName();
+
+        while (output.length() < 20) {
+            output = output.concat(" ");
+
+        }
+        return output.concat("|");
+    }
+
 }

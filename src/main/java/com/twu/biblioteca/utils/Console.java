@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Console {
-
     private Scanner input;
+
     private Message message = new Message();
 
     public Console(Scanner input) {
@@ -17,8 +17,14 @@ public class Console {
         print(message.welcomeMessage());
     }
 
-    public String selectAnOption() {
-        print(message.selectAnOption());
+    public String clientMenu() {
+        print(message.clientMenu());
+        return input.next();
+    }
+
+
+    public String adminMenu() {
+        print(message.adminMenu());
         return input.next();
     }
 
@@ -47,8 +53,18 @@ public class Console {
         print(message.isReturnSuccessful(bool));
     }
 
-    public void printAnyList(List<String> strings) {
-        print(message.listHead());
+    public void printBookList(List<String> strings) {
+        print(message.bookListHead() + '\n');
+
+        for (String s :
+                strings) {
+            print(s);
+        }
+
+    }
+
+    public void printMovieList(List<String> strings) {
+        print(message.movieListHead() + '\n');
 
         for (String s :
                 strings) {
@@ -84,4 +100,8 @@ public class Console {
 
     }
 
+    public String simpleMenu() {
+        print(message.simpleMenu());
+        return input.next();
+    }
 }

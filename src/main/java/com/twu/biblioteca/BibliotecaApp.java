@@ -4,21 +4,18 @@ package com.twu.biblioteca;
 import com.twu.biblioteca.libraryitem.Book;
 import com.twu.biblioteca.libraryitem.LibraryItem;
 import com.twu.biblioteca.libraryitem.Movie;
+import com.twu.biblioteca.user.Role;
 import com.twu.biblioteca.user.User;
 import com.twu.biblioteca.utils.AccountManager;
 import com.twu.biblioteca.utils.CatalogueAdmin;
 import com.twu.biblioteca.utils.Console;
-
-import java.util.ArrayList;
-import java.util.BitSet;
-import java.util.List;
 
 public class BibliotecaApp {
 
     private CatalogueAdmin catalogueAdmin;
     private Console console;
     private AccountManager accountManager;
-    private boolean isLogged = false;
+    private boolean isSomeoneLogged = false;
 
     public BibliotecaApp(CatalogueAdmin catalogueAdmin, Console console) {
         this.catalogueAdmin = catalogueAdmin;
@@ -40,9 +37,7 @@ public class BibliotecaApp {
         addItemToList(movie2);
 
         bookAnItem(book);
-        bookAnItem(book1);
-        returnAnItem(book1);
-        returnAnItem(book);
+        book.setUser(new User("Adriana","email",234,"1234"));
         menu();
     }
 
@@ -64,7 +59,7 @@ public class BibliotecaApp {
                 login();
                 break;
             case "2":
-                listItems();
+                simpleMenu();
                 break;
             default:
                 console.print("Digite um valor válido.");
@@ -74,37 +69,91 @@ public class BibliotecaApp {
         again();
     }
 
+    private void simpleMenu() {
+        String option = console.simpleMenu();
+
+        switch (option) {
+            case "1":
+                listAvailableBooks();
+                break;
+            case "2":
+                listAvailableMovies();
+                break;
+        }
+    }
+
     private void login() {
         String libraryId = console.username();
-        if(libraryId.toLowerCase().equals("b")) {
+        if (libraryId.toLowerCase().equals("b")) {
             loginOrList();
         }
         String password = console.password();
 
-        if(authenticate(libraryId, password)) {
-            isLogged = true;
+        if (authenticate(libraryId, password)) {
+            isSomeoneLogged = true;
             console.loginSucceed(true);
-            listItems();
+            dynamicMenu(libraryId);
         } else {
             console.loginSucceed(false);
             login();
         }
     }
 
-    public boolean authenticate(String email, String password) {
-        return accountManager.authenticate(email,password);
+    private void dynamicMenu(String libraryId) {
+        Role role = accountManager.getRole(libraryId);
+
+        if (role == Role.CLIENT) {
+            clientMenu();
+        } else {
+            adminMenu();
+        }
     }
 
-    public void listItems() {
-
-        String option = console.selectAnOption();
-
+    private void adminMenu() {
+        String option = console.adminMenu();
         switch (option) {
             case "1":
-                listBooks();
+                listAvailableBooks();
                 break;
             case "2":
+                listAvailableMovies();
+                break;
+            case "3":
+                listBooks();
+                break;
+            case "4":
                 listMovies();
+                break;
+            case "5":
+                logout();
+            default:
+                console.print("Digite um valor válido.");
+                again();
+                break;
+        }
+
+    }
+
+    private void listMovies() {console.printMovieList(catalogueAdmin.retrieveMovieListForMenu());
+    }
+
+    private void listBooks() {
+        console.printBookList(catalogueAdmin.retrieveBookListForMenu());
+    }
+
+    public boolean authenticate(String email, String password) {
+        return accountManager.authenticate(email, password);
+    }
+
+    public void clientMenu() {
+
+        String option = console.clientMenu();
+        switch (option) {
+            case "1":
+                listAvailableBooks();
+                break;
+            case "2":
+                listAvailableMovies();
                 break;
             case "3":
                 listUserInfo();
@@ -119,7 +168,7 @@ public class BibliotecaApp {
     }
 
     private void logout() {
-        isLogged = false;
+        isSomeoneLogged = false;
         loginOrList();
     }
 
@@ -127,12 +176,12 @@ public class BibliotecaApp {
         console.print(accountManager.getWhoIsLogged().toString());
     }
 
-    private void listMovies() {
-        console.printAnyList(catalogueAdmin.retrieveMovieListForMenu());
+    private void listAvailableMovies() {
+        console.printMovieList(catalogueAdmin.retrieveAvailableMovieListForMenu());
     }
 
-    private void listBooks() {
-        console.printAnyList(catalogueAdmin.retrieveBookListForMenu());
+    private void listAvailableBooks() {
+        console.printBookList(catalogueAdmin.retrieveAvailableBookListForMenu());
     }
 
     private void again() {
@@ -157,8 +206,8 @@ public class BibliotecaApp {
     }
 
     private void lastMenu() {
-        if(isLogged) {
-            listItems();
+        if (isSomeoneLogged) {
+            clientMenu();
         } else {
             loginOrList();
         }

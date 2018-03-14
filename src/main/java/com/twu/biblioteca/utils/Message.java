@@ -1,23 +1,33 @@
 package com.twu.biblioteca.utils;
 
+import com.sun.org.apache.regexp.internal.RE;
+
 public class Message {
 
 
-    public String listHead() {
+    public String bookListHead() {
         return
                 "           TITLE         |" +
                 "          AUTHOR         |" +
                 " PUBLISH YEAR |" +
-                " AVAILABLE | \n";
+                " AVAILABLE |";
 
     }
     public String movieListHead() {
         return
                          "           TITLE         |" +
                         "          AUTHOR         |" +
-                        " RATING |" +
-                        " AVAILABLE | \n";
+                        "    RATING    |" +
+                        " AVAILABLE |";
 
+    }
+
+    public String adminMovieListHead() {
+        return movieListHead().concat("         USER       |");
+    }
+
+    public String adminBookListHead() {
+        return bookAddedToList().concat("        USER       |");
     }
     public String welcomeMessage () {
         return "Welcome to Biblioteca!";
@@ -45,15 +55,21 @@ public class Message {
         return "There's no such a book in our list.";
     }
 
-    public String selectAnOption () {
-        return "Please select an Option \n" +
-                "1. List Books\n" +
-                "2. List Movies\n" +
+    public String clientMenu() {
+        return  simpleMenu() +
                 "3. My Info\n" +
                 "4. To logout";
     }
 
-    public String doYouWantToContinue () {
+    public String adminMenu() {
+        return  simpleMenu() +
+                "3. List All Books\n"+
+                "4. List All Movies \n" +
+                "3. My Info\n" +
+                "4. To logout";
+    }
+
+    public String doYouWantToContinue() {
         return "Do you want to continue on the app? Type Y for Yes, N for no or B to last menu:";
     }
 
@@ -84,5 +100,11 @@ public class Message {
         return login ?
                 "Login Successful":
                 "Login error. Try again";
+    }
+
+    public String simpleMenu() {
+        return  "Please select an Option \n" +
+                "1. List Available Books\n" +
+                "2. List Available Movies\n";
     }
 }

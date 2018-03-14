@@ -19,6 +19,11 @@ public class AccountManager {
         User user2 = new User("teste","teste",1234,"1234");
         user2.setLibraryID("123-1234");
         userList.add(user2);
+
+        User admin = new User("admin", "admin", 1234,"1234");
+        admin.setLibraryID("666-6666");
+        admin.setRole(Role.ADMIN);
+        userList.add(admin);
     }
 
     public void addUser(User user) {
@@ -102,5 +107,14 @@ public class AccountManager {
             }
         }
         return null;
+    }
+
+    public Role getRole(String libraryId) {
+        for (User user: userList) {
+            if(user.getLibraryID().equals(libraryId)) {
+                return user.getRole();
+            }
+        }
+        return Role.CLIENT;
     }
 }
